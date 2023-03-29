@@ -15,7 +15,7 @@ document.addEventListener("click", function (e) {
   } else if (e.target.dataset.complete) {
     handleCompleteClick();
   } else if (e.target.dataset.pay) {
-    handlePayClick();
+    handlePayClick(e);
   }
 });
 
@@ -24,16 +24,23 @@ function handleCompleteClick() {
     payModal.style.display = "flex";
   }, 700);
 }
-function handlePayClick() {
-  setTimeout(() => {
-    payModal.style.display = "none";
-    orderContainer.innerHTML = `<h1 class="thanks">Thanks James! Your order is on its way!</h1>`;
-  }, 700);
+function handlePayClick(e) {
+  e.preventDefault();
+  const fullName = document.querySelector("#full-name").value;
+  const cardNumber = document.querySelector("#card-number").value;
+  const cvv = document.querySelector("#cvv").value;
+  if (fullName && cardNumber && cvv) {
+    setTimeout(() => {
+      payModal.style.display = "none";
+      orderContainer.innerHTML = `<h1 class="thanks">Thanks ${fullName}! Your order is on its way!</h1>`;
+    }, 700);
+  }
 }
 function handleAddClick(foodId) {
   orderedFoods.push(menuArray[foodId]);
   renderOrderedHtml();
 }
+
 function handleRemoveClick(removeId) {
   const index = orderedFoods.findIndex((obj) => obj.id == removeId);
   if (index > -1) {

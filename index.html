@@ -35,10 +35,27 @@
       >
       <h2>Enter Card Details</h2>
       <form action="">
-        <input type="text" placeholder="Enter your name" required />
-        <input type="tel" placeholder="Enter card number" required />
-        <input type="number" placeholder="Enter CVC" required />
-        <button class="btn" data-pay="pay">Pay</button>
+        <input
+          type="text"
+          placeholder="Enter your name"
+          required
+          id="full-name"
+        />
+        <input
+          type="tel"
+          placeholder="Enter card number"
+          maxlength="19"
+          required
+          id="card-number"
+        />
+        <input
+          type="number"
+          placeholder="Enter CVV"
+          maxlength="4"
+          required
+          id="cvv"
+        />
+        <button type="submit" class="btn" data-pay="pay">Pay</button>
       </form>
     </div>
     <script src="App.js" type="module"></script>
