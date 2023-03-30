@@ -24,6 +24,11 @@ function handleCompleteClick() {
     payModal.style.display = "flex";
   }, 700);
 }
+
+closeModal.addEventListener("click", function () {
+  payModal.style.display = "none";
+});
+
 function handlePayClick(e) {
   e.preventDefault();
   const fullName = document.querySelector("#full-name").value;
@@ -36,15 +41,15 @@ function handlePayClick(e) {
     }, 700);
   }
 }
+
 function handleAddClick(foodId) {
-  orderedFoods.push(menuArray[foodId]);
+  menuArray[foodId].count++;
   renderOrderedHtml();
 }
 
 function handleRemoveClick(removeId) {
-  const index = orderedFoods.findIndex((obj) => obj.id == removeId);
-  if (index > -1) {
-    orderedFoods.splice(index, 1);
+  if (menuArray[removeId].count > 0) {
+    menuArray[removeId].count--;
   }
   renderOrderedHtml();
 }
@@ -54,24 +59,28 @@ function renderOrderedHtml() {
   const totalPriceContainer = document.querySelector(".total-price-container");
   let orderedHtml = "";
   let totalPrice = 0;
+  let orderedFoods = menuArray.filter(function (item) {
+    return item.count > 0;
+  });
+
   orderedFoods.forEach(function (x) {
-    totalPrice += x.price;
+    totalPrice += x.price * x.count;
     orderedHtml += `
-    <div class="ordered-item"><h2>${x.name}<span class="remove-item" data-remove=${x.id}> remove</span></h2>
-          <h4>$${x.price}</h4></div>
-    
-    `;
+      <div class="ordered-item"><h2>${x.name} x ${
+      x.count
+    }<span class="remove-item" data-remove=${x.id}> remove</span></h2>
+            <h4>$${x.price * x.count}</h4></div>
+
+      `;
   });
   orderedItems.innerHTML = orderedHtml;
   totalPriceContainer.innerHTML = `
             <h2>Total Price</h2>
             <h4>$${totalPrice}</h4>
           `;
+
   orderContainer.style.display = orderedFoods.length === 0 ? "none" : "block";
 }
-closeModal.addEventListener("click", function () {
-  payModal.style.display = "none";
-});
 
 function render() {
   let menuElements = "";
