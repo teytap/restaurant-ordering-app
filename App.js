@@ -42,6 +42,9 @@ function handlePayClick(e) {
       ).innerHTML = `<h1 class="thanks">Thanks ${fullName}! Your order is on its way!</h1>
         `;
     }, 700);
+    setTimeout(() => {
+      location.reload();
+    }, 3000);
   }
 }
 

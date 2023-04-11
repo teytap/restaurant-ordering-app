@@ -35,6 +35,7 @@ h1 {
   border-bottom: 1px solid #d2d2d2;
   gap: 20px;
 }
+
 .menu-el-info {
   display: flex;
   flex-direction: column;
@@ -53,11 +54,13 @@ h1 {
   text-align: center;
   height: 40px;
   width: 40px;
-
   border: 1px solid #d2d2d2;
   border-radius: 50%;
   cursor: pointer;
   background-color: transparent;
+}
+.add-btn:hover {
+  background-color: #c9eedd;
 }
 /* Order */
 .order-container {
