@@ -5,8 +5,7 @@ const orderContainer = document.querySelector(".order-container");
 const closeModal = document.querySelector(".close-modal");
 const payModal = document.querySelector(".pay-modal");
 
-let orderedFoods = [];
-
+//gathered all events listeners in one by dataset
 document.addEventListener("click", function (e) {
   if (e.target.dataset.add) {
     handleAddClick(e.target.dataset.add);
@@ -20,6 +19,7 @@ document.addEventListener("click", function (e) {
 });
 
 function handleCompleteClick() {
+  //used setTimeout to look like realistic
   setTimeout(() => {
     payModal.style.display = "flex";
   }, 700);
@@ -37,7 +37,10 @@ function handlePayClick(e) {
   if (fullName && cardNumber && cvv) {
     setTimeout(() => {
       payModal.style.display = "none";
-      orderContainer.innerHTML = `<h1 class="thanks">Thanks ${fullName}! Your order is on its way!</h1>`;
+      document.querySelector(
+        "main"
+      ).innerHTML = `<h1 class="thanks">Thanks ${fullName}! Your order is on its way!</h1>
+        `;
     }, 700);
   }
 }
@@ -53,7 +56,7 @@ function handleRemoveClick(removeId) {
   }
   renderOrderedHtml();
 }
-
+//shows ordered list and bill
 function renderOrderedHtml() {
   const orderedItems = document.querySelector(".ordered-items");
   const totalPriceContainer = document.querySelector(".total-price-container");
@@ -81,7 +84,7 @@ function renderOrderedHtml() {
 
   orderContainer.style.display = orderedFoods.length === 0 ? "none" : "block";
 }
-
+// gets menu list html
 function render() {
   let menuElements = "";
   menuArray.forEach(function (food) {
